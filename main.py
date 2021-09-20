@@ -4,6 +4,7 @@ from ticket import Ticket, TicketDetail
 from flask import Flask
 from flask_restful import Api
 from database import db
+from load_data import load_jacaranda_data
 
 app = Flask(__name__)
 api = Api(app)
@@ -14,6 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sly:@127.0.0.1/jacadb'
 @app.before_first_request
 def create_tables():
     db.create_all()
+    #load_jacaranda_data()
 
 
 api.add_resource(Message, "/message/")

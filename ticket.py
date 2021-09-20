@@ -16,7 +16,7 @@ ticket_post_args.add_argument(
 ticket_post_args.add_argument(
     "phone", type=int, help="PhoneNumber is required", required=True)
 ticket_post_args.add_argument(
-    "intents", type=list, help="Intents are required", required=True)
+    "intents", type=str,required=True,help="Intents are required", action='append')
 
 
 ticket_patch_args = reqparse.RequestParser()
@@ -27,14 +27,14 @@ ticket_patch_args.add_argument(
 ticket_patch_args.add_argument(
     "phone", type=int, help="PhoneNumber is required", required=False)
 ticket_patch_args.add_argument(
-    "intents", type=str, help="Intents are required", required=False)
+    "intents", type=str, help="Intents are required", required=False, action='append')
 
 
 resource_fields = {
     'ticket_id': fields.Integer,
     'subject': fields.String,
     'phone': fields.Integer,
-    'intents':fields.List
+    'intents':fields.String
 }
 TCKT_NOT_FOUND = "Ticket not found for id: {}"
 TCKT_DELETE_SUCCESS = "Ticket deleted successfully for id: {}"
@@ -76,7 +76,6 @@ class Ticket(Resource):
     @marshal_with(resource_fields)
     def post(self):
         args = ticket_post_args.parse_args()
-        import pdb; pdb.set_trace()
         ticket = TicketModel(
             ticket_id=args['ticket_id'],
             subject=args['subject'],
