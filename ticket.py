@@ -61,6 +61,7 @@ TICKET_DELETE_SUCCESS = "Ticket deleted successfully for id: {}"
 LOAD_DATA_SUCCESS = "Data successfully loaded"
 
 class TicketDetail(Resource):
+    @marshal_with(tkt_get_resource_fields)
     def get(self, ticket_id):
         result = TicketModel.query.filter_by(ticket_id=ticket_id).first()
         if result:
