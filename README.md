@@ -23,3 +23,4 @@
 9. load-data http://127.0.0.1:5000/load-data
 
 ### Sample ticket response
+<img width="785" alt="Screenshot 2021-09-20 at 23 33 28" src="https://user-images.githubusercontent.com/28457081/134071927-547de402-9df0-4937-bd8e-1f5b06ec818d.png">
