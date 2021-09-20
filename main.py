@@ -1,6 +1,6 @@
 
 from message import Message, MessageDetail
-from ticket import Ticket,TicketDetail
+from ticket import Ticket, TicketDetail
 from flask import Flask
 from flask_restful import Api
 from database import db
