@@ -4,8 +4,8 @@ from database import db
 from schema import MessageSchema
 
 
-msgSchema = MessageSchema()
-msgListSchema = MessageSchema(many=True)
+messageSchema = MessageSchema()
+messageListSchema = MessageSchema(many=True)
 
 message_post_args = reqparse.RequestParser()
 message_post_args.add_argument(
@@ -57,7 +57,7 @@ class MessageDetail(Resource):
     def get(self, message_id):
         result = MessageModel.query.filter_by(id=message_id).first()
         if result:
-            return msgSchema.dump(result)
+            return messageSchema.dump(result)
         return {'message': MSG_NOT_FOUND.format(message_id)}, 404
 
     @marshal_with(resource_fields)
@@ -80,7 +80,7 @@ class MessageDetail(Resource):
             if msg_req_json['incoming'] is not None:
                 msg_data.incoming = msg_req_json['incoming']
             db.session.commit()
-            return msgSchema.dump(msg_data)
+            return messageSchema.dump(msg_data)
         return {'message': MSG_NOT_FOUND.format(message_id)}, 404
 
     def delete(self, message_id):
@@ -111,4 +111,4 @@ class Message(Resource):
     @marshal_with(resource_fields)
     def get(self):
         msgs = MessageModel.query.all()
-        return msgListSchema.dump(msgs), 200
+        return messageListSchema.dump(msgs), 200

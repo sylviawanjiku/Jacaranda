@@ -1,4 +1,4 @@
-from mash import ma
+from marsh import ma
 from database import db
 
 # from marshmallow import Schema, fields

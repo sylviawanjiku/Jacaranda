@@ -6,8 +6,8 @@ from database import db
 from schema import TicketSchema
 from load_data import load_jacaranda_data
 
-tktSchema = TicketSchema()
-tktListSchema = TicketSchema(many=True)
+ticketSchema = TicketSchema()
+ticketListSchema = TicketSchema(many=True)
 
 ticket_post_args = reqparse.RequestParser()
 ticket_post_args.add_argument(
@@ -65,7 +65,7 @@ class TicketDetail(Resource):
     def get(self, ticket_id):
         result = TicketModel.query.filter_by(ticket_id=ticket_id).first()
         if result:
-            return tktSchema.dump(result)
+            return ticketSchema.dump(result)
         return {'message': TICKET_NOT_FOUND.format(ticket_id)}, 404
 
     @marshal_with(resource_fields)
@@ -82,7 +82,7 @@ class TicketDetail(Resource):
             if tckt_req_json.get('intents', None):
                 tckt_data.intents = tckt_req_json['intents']
             db.session.commit()
-            return tktSchema.dump(tckt_data)
+            return ticketSchema.dump(tckt_data)
         return {'message': TICKET_NOT_FOUND.format(ticket_id)}, 404
 
     def delete(self, ticket_id):
@@ -110,7 +110,7 @@ class Ticket(Resource):
     @marshal_with(tkt_get_resource_fields)
     def get(self):
         ticket = TicketModel.query.all()
-        return tktListSchema.dump(ticket), 200
+        return ticketListSchema.dump(ticket), 200
 
 
 class LoadData(Resource):
