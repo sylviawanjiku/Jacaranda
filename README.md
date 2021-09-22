@@ -8,7 +8,7 @@
 4. Activate the virtual environment `source venv/bin/activate` and get the environment variables `source .env`
 5. Install dependencies needed for the project to run `$ pip install -r requirements.txt`
 6. Run the application `python3 main.py`
-7. To test the test `pytest`
+7. To run the tests `pytest`
 8. To the load the data make a get request to `http://127.0.0.1:5000/load-data`
 
 ### Sample env
