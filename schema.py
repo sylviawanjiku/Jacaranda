@@ -19,15 +19,15 @@ class TicketSchema(ma.SQLAlchemyAutoSchema):
 
   def get_incoming_messages(self, obj):
     messageListSchema = MessageSchema(many=True)
-    msgs = db.session.query(MessageModel).filter(
+    messages = db.session.query(MessageModel).filter(
         MessageModel.ticket_id==obj.ticket_id, MessageModel.incoming==True)
-    return messageListSchema.dump(msgs)
+    return messageListSchema.dump(messages)
   
   def get_outgoing_messages(self, obj):
     messageListSchema = MessageSchema(many=True)
-    msgs = db.session.query(MessageModel).filter(
+    messages = db.session.query(MessageModel).filter(
         MessageModel.ticket_id == obj.ticket_id, MessageModel.incoming == False)
-    return messageListSchema.dump(msgs)
+    return messageListSchema.dump(messages)
   
   class Meta:
     model = TicketModel
